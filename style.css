@@ -53,13 +53,13 @@ h2 {
 
 #player .far,
 #player .choice {
-  color: blue;
+  color: #95C8D8; /* Sky Blue */
   cursor: pointer;
 }
 
 #computer .far,
 #computer .choice {
-  color: red;
+  color: #FF0800; /* Candy Red */
 }
 
 /* Remove margin of last icon */
