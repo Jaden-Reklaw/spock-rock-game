@@ -39,6 +39,24 @@ const resetSelected = () => {
   });
 }
 
+// Reset Score & playerChoice/computerChoice
+const resetAll = () => {
+  // Reset Scores
+  playerScoreNumber = 0;
+  computerScoreNumber = 0;
+  // Show updated scores to DOM
+  playerScoreEl.textContent = playerScoreNumber;
+  computerScoreEl.textContent = computerScoreNumber;
+  // Reset player and computer choice text
+  playerChoiceEl.textContent = '';
+  computerChoiceEl.textContent = '';
+  // Reset result of who won last
+  resultText.textContent = '';
+  // reset all choice icons
+  resetSelected();
+  
+}
+
 // Random Computer Choice
 const computerRandomChoice = () => {
   // Get random number from 1 to 5
@@ -89,13 +107,12 @@ const displayComputerChoice = () => {
 
 // Check result, increase scores, update resultText
 const updateScore = (playerChoice) => {
-  console.log('player choice', playerChoice);
-  console.log('computer choice', computerChoice);
   if(playerChoice === computerChoice) {
     resultText.textContent = `It's a tie.`;
   } else {
     const choice = choices[playerChoice];
-    console.log(choice.defeats.indexOf(computerChoice));
+    //choice.defeats.indexOf(computerChoice) return less then one the computer wins
+    //since the object returns negative 1 if players choice does not defeat the computers choice
     if(choice.defeats.indexOf(computerChoice) > -1) {
       // Update text, score plus one and update player score to DOm
       resultText.textContent = `You won this round!`;
