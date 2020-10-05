@@ -27,6 +27,8 @@ const choices = {
   spock: { name: 'Spock', defeats: ['scissors', 'rock'] },
 };
 
+let computerChoice = '';
+
 // Reset all 'selected' icons
 const resetSelected = () => {
   allGameIcons.forEach((icon) => {
@@ -34,9 +36,68 @@ const resetSelected = () => {
   });
 }
 
-const select = (playerChoice) => {
+// Random Computer Choice
+const computerRandomChoice = () => {
+  // Get random number from 1 to 5
+  const computerChoiceNumber = Math.floor(Math.random() * 5) + 1;
+  if(computerChoiceNumber === 1) {
+    computerChoice = 'rock';
+  } else if(computerChoiceNumber === 2) {
+    computerChoice = 'paper';
+  } else if(computerChoiceNumber === 3) {
+    computerChoice = 'scissors';
+  }
+  else if(computerChoiceNumber === 4) {
+    computerChoice = 'lizard';
+  }
+  else if(computerChoiceNumber === 5) {
+    computerChoice = 'spock';
+  }
+}
+
+// Add 'selected' styling and computerChoice text
+const displayComputerChoice = () => {
+  // Add 'selected' styling and update ComputerChoice Text
+  switch(computerChoice) {
+    case 'rock':
+      computerRock.classList.add('selected');
+      computerChoiceEl.textContent = ' --- Rock';
+      break;
+    case 'paper':
+      computerPaper.classList.add('selected');
+      computerChoiceEl.textContent = ' --- Paper';
+      break;
+    case 'scissors':
+        computerScissors.classList.add('selected');
+        computerChoiceEl.textContent = ' --- Scissors';
+        break;
+      case 'lizard':
+        computerLizard.classList.add('selected');
+        computerChoiceEl.textContent = ' --- Lizard';
+        break;
+      case 'spock':
+        computerSpock.classList.add('selected');
+        computerChoiceEl.textContent = ' --- Spock';
+        break;
+      default:
+        break;
+  }
+}
+
+// Call function to process turn
+const checkResult = () => {
   // Reset icons before selecting
   resetSelected();
+
+  // Get random computer choice
+  computerRandomChoice();
+
+  // Display computers choice to the screen
+  displayComputerChoice();
+}
+
+const select = (playerChoice) => {
+  checkResult();
 
   // Add 'selected' styling and update playerChoice Text
   switch(playerChoice) {
