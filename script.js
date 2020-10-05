@@ -28,6 +28,9 @@ const choices = {
 };
 
 let computerChoice = '';
+//Player and Computer Scores
+let computerScoreNumber = 0;
+let playerScoreNumber = 0;
 
 // Reset all 'selected' icons
 const resetSelected = () => {
@@ -84,8 +87,30 @@ const displayComputerChoice = () => {
   }
 }
 
+// Check result, increase scores, update resultText
+const updateScore = (playerChoice) => {
+  console.log('player choice', playerChoice);
+  console.log('computer choice', computerChoice);
+  if(playerChoice === computerChoice) {
+    resultText.textContent = `It's a tie.`;
+  } else {
+    const choice = choices[playerChoice];
+    console.log(choice.defeats.indexOf(computerChoice));
+    if(choice.defeats.indexOf(computerChoice) > -1) {
+      // Update text, score plus one and update player score to DOm
+      resultText.textContent = `You won this round!`;
+      playerScoreNumber++;
+      playerScoreEl.textContent = playerScoreNumber;
+    } else {
+      resultText.textContent = `Computer won this round!`;
+      computerScoreNumber++;
+      computerScoreEl.textContent = computerScoreNumber;
+    }
+  }
+}
+
 // Call function to process turn
-const checkResult = () => {
+const checkResult = (playerChoice) => {
   // Reset icons before selecting
   resetSelected();
 
@@ -94,10 +119,13 @@ const checkResult = () => {
 
   // Display computers choice to the screen
   displayComputerChoice();
+
+  // Check the scores
+  updateScore(playerChoice);
 }
 
 const select = (playerChoice) => {
-  checkResult();
+  checkResult(playerChoice);
 
   // Add 'selected' styling and update playerChoice Text
   switch(playerChoice) {
