@@ -213,3 +213,5 @@ function updateParticles() {
 	}
 }
 
+//Export functions to be used on script.js
+export { startConfetti, stopConfetti, removeConfetti };
